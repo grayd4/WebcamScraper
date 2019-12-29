@@ -45,7 +45,7 @@ if __name__ == "__main__":
     # If a night photo - from 8 pm to 4 am
     if timeLocal > 19 or timeLocal < 4:
         folderName = 'Night'
-    print('Folder Name = ' + folderName + ', Time = ' + str(timeLocal))
+    # print('Folder Name = ' + folderName + ', Time = ' + str(timeLocal))   # For testing
 
     getPhoto(folderName)
     createVideo(folderName)
