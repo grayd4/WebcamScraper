@@ -1,5 +1,6 @@
 # WebcamScraper
-Basic web scraper for various webcams
+Basic web scraper for various webcams.
+This can be tweaked to work with other cams, but right now the command only works with glacier nat'l park cams
 
 Besides python3 this is necessary: 
 
