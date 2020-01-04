@@ -8,8 +8,7 @@ import glob     # "
 from os import path
 from datetime import datetime
 
-# Apgar Mt. Northeast View NPS Webcam
-#url = 'https://www.nps.gov/webcams-glac/'
+# Set up arguments command can take
 parser = argparse.ArgumentParser(description='Get some webcam footage')
 parser.add_argument('-c', '-cam', default = 'aplocam', \
     help = 'The camera to grab the snapshot from. Is the unique identifier in the camera\'s URL', \
@@ -45,7 +44,7 @@ def createVideo(folderName, args):
 
     # Create the 'video' that has yet to have images added to it
     # file name, fourcc, fps/images per second, size
-    out = cv2.VideoWriter(initialLocation + args.camera + folderName + '.avi', cv2.VideoWriter_fourcc(*'DIVX'), 2, size)
+    out = cv2.VideoWriter(initialLocation + args.camera + folderName + '.avi', cv2.VideoWriter_fourcc(*'DIVX'), 3, size)
 
     # Add image to video
     for i in range(len(imgList)):

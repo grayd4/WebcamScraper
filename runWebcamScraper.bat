@@ -12,5 +12,6 @@ python scraper.py -c smcam
 python scraper.py -c smptz
 python scraper.py -c tmcam
 python scraper.py -c twomedptz
+python scraper.py -c flathead
 python scraper.py -c current_ridgecam -u https://www.nps.gov/webcams-olym/
 
