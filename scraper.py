@@ -5,6 +5,8 @@ import sys      # For accepting parameters
 import cv2      # For video combining
 import os       # "
 import glob     # "
+import json     # For sunset
+import requests # For sunset
 from os import path
 from datetime import datetime
 
@@ -15,6 +17,19 @@ parser.add_argument('-c', '-cam', default = 'aplocam', \
        metavar = 'CAM', dest = 'camera')
 parser.add_argument('-u', '-url', default = 'https://www.nps.gov/webcams-glac/', \
     help = 'The url location of the webcam\'s snapshot', metavar = 'URL', dest = 'URL')
+
+# Sunset flags:
+# If sunset set to true, will only grab photo if the current time is near to the sunset time
+# of the given latitude and longitude
+parser.add_argument('-s', '-sunset', default = 'false', \
+    help = 'If this is set to \'true\', then the photo will only be grabbed if it\'s sunset in the \
+        given timezone. \'true\' triggers the sunset, anything else will not.', metavar = 'SUN', dest = 'sunset')
+parser.add_argument('-lat', '-latitude', default = '48.5', help = 'Latitude to measure sunset time at.', \
+    metavar = 'LAT', dest = 'latitude')
+parser.add_argument('-lon', '-longitude', default = '-113.3', help = 'Longitude to measure sunset time at.', \
+    metavar = 'LON', dest = 'longitude')
+
+
 
 # Retrieve a photo and save it in the correct folder depending on the time of day
 # folderName = whetehr to place in day/night folder
@@ -44,7 +59,7 @@ def createVideo(folderName, args):
 
     # Create the 'video' that has yet to have images added to it
     # file name, fourcc, fps/images per second, size
-    out = cv2.VideoWriter(initialLocation + args.camera + folderName + '.avi', cv2.VideoWriter_fourcc(*'DIVX'), 3, size)
+    out = cv2.VideoWriter(initialLocation + args.camera + folderName + '.avi', cv2.VideoWriter_fourcc(*'DIVX'), 0.5, size)
 
     # Add image to video
     for i in range(len(imgList)):
@@ -61,22 +76,45 @@ def checkAndCreateFolders(folderName, args):
         except OSError:
             print ("Creation of the directory %s failed" % location)
 
-# First argument is the name of the camera as. specified in the image's URL (e.g. aplocam)
-if __name__ == "__main__":
-
+# Execute the standard webcam photo grabbing
+def takeWebcamPhotoComplete(args):
     # Returns the hour (0-24). Meant to be used in the Pacific timezone
     timeLocal = time.localtime(time.time()).tm_hour
     folderName = 'Day'
+    if (args.sunset == 'true'):
+        folderName = 'Sunset'
 
     # If a night photo - from 8 pm to 4 am
-    if timeLocal > 19 or timeLocal < 4:
+    elif timeLocal > 19 or timeLocal < 4:
         folderName = 'Night'
-
-    args = parser.parse_args()
 
     checkAndCreateFolders(folderName, args)
     getPhoto(folderName, args)
     createVideo(folderName, args)
+
+# Check sunset time at given coordinates
+# Return true if close to sunset time, false if not
+def getSunsetTime(args):
+    try:
+        lat = float(args.latitude)
+        lon = float(args.longitude)
+    except ValueError:
+        print("Latitude or longitude flags are not valid floats.")
+        return False, time.time()
+    requestURL = 'https://api.sunrise-sunset.org/json?lat=' + lat + '&lng=' + lon 
+    response = requests.post(requestURL)
+    if response.status_code != 200:
+        return False, time.time()
+    responseDict = json.loads(response)         # Convert json response to python dict
+    
+    
+
+# First argument is the name of the camera as. specified in the image's URL (e.g. aplocam)
+if __name__ == "__main__":
+
+    args = parser.parse_args()
+    takeWebcamPhotoComplete(args) 
+    
     
 
 
