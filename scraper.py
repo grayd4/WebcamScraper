@@ -8,7 +8,7 @@ import glob     # "
 import json     # For sunset
 import requests # For sunset
 from os import path
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Set up arguments command can take
 parser = argparse.ArgumentParser(description='Get some webcam footage')
@@ -28,8 +28,6 @@ parser.add_argument('-lat', '-latitude', default = '48.5', help = 'Latitude to m
     metavar = 'LAT', dest = 'latitude')
 parser.add_argument('-lon', '-longitude', default = '-113.3', help = 'Longitude to measure sunset time at.', \
     metavar = 'LON', dest = 'longitude')
-
-
 
 # Retrieve a photo and save it in the correct folder depending on the time of day
 # folderName = whetehr to place in day/night folder
@@ -88,26 +86,38 @@ def takeWebcamPhotoComplete(args):
     elif timeLocal > 19 or timeLocal < 4:
         folderName = 'Night'
 
-    checkAndCreateFolders(folderName, args)
-    getPhoto(folderName, args)
-    createVideo(folderName, args)
+    # Execute procedure if we don't care about sunset or if sunset conditionas are met
+    if folderName != 'Sunset' or (folderName == 'Sunset' and isSunsetTime(args, 30)):
+        checkAndCreateFolders(folderName, args)
+        getPhoto(folderName, args)
+        createVideo(folderName, args)
 
 # Check sunset time at given coordinates
+# args: command flags
+# marginOfCloseness: acceptable window of how close to sunset we must be, in minutes
 # Return true if close to sunset time, false if not
-def getSunsetTime(args):
+def isSunsetTime(args, marginOfCloseness):
+    # Grab lat and lon from args if the are correctly formatted
     try:
         lat = float(args.latitude)
         lon = float(args.longitude)
     except ValueError:
         print("Latitude or longitude flags are not valid floats.")
-        return False, time.time()
+        return False
+
+    # Get sunset times from this handy API: returns times in UTC
     requestURL = 'https://api.sunrise-sunset.org/json?lat=' + lat + '&lng=' + lon 
     response = requests.post(requestURL)
     if response.status_code != 200:
-        return False, time.time()
-    responseDict = json.loads(response)         # Convert json response to python dict
+        return False
+    sunsetResponseDict = json.loads(response.json()['results'])                         # Convert json response to python dict
+    sunsetTime = datetime.strptime(sunsetResponseDict["sunset"], "%I:%M:%S %p").time()  # Extract sunset time
+    timeNow = datetime.utcnow().time()                                                  # Get current UTC time
     
-    
+    # Check if current time is within margin of closeness to the given sunset time
+    if (timeNow - timedelta(minutes = marginOfCloseness) <= sunsetTime < timeNow + timedelta(minutes = marginOfCloseness)):
+        return True
+    return False
 
 # First argument is the name of the camera as. specified in the image's URL (e.g. aplocam)
 if __name__ == "__main__":
