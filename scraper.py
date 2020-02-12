@@ -17,6 +17,8 @@ parser.add_argument('-c', '-cam', default = 'aplocam', \
        metavar = 'CAM', dest = 'camera')
 parser.add_argument('-u', '-url', default = 'https://www.nps.gov/webcams-glac/', \
     help = 'The url location of the webcam\'s snapshot', metavar = 'URL', dest = 'URL')
+parser.add_argument('-sub', '-subfolder', default = '', help = 'Subfolder to send image to for organization within output', \
+    metavar = 'SUB', dest = 'subfolder')
 
 # Sunset flags:
 # If sunset set to true, will only grab photo if the current time is near to the sunset time
@@ -29,12 +31,17 @@ parser.add_argument('-lat', '-latitude', default = '48.5', help = 'Latitude to m
 parser.add_argument('-lon', '-longitude', default = '-113.3', help = 'Longitude to measure sunset time at.', \
     metavar = 'LON', dest = 'longitude')
 
+
+
 # Retrieve a photo and save it in the correct folder depending on the time of day
 # folderName = whetehr to place in day/night folder
 # cam = name of cam to get image from
 def getPhoto(folderName, args):
     # File location and name of the photo to save
-    nameString = 'Output/' + args.camera + '/' + folderName + '/' + args.camera + str(time.time()) + '.jpg'
+    nameString = 'Output/' 
+    if args.subfolder != '':
+        nameString += args.subfolder + '/'
+    nameString += args.camera + '/' + folderName + '/' + args.camera + str(time.time()) + '.jpg'
     # Save the webcam capture in the desired location
     urllib.request.urlretrieve(args.URL + args.camera + '.jpg', nameString)
 
@@ -45,7 +52,10 @@ def createVideo(folderName, args):
     # Largely from https://theailearner.com/2018/10/15/creating-video-from-images-using-opencv-python/
     imgList = []
     #C:/Working/WebcamScraper
-    initialLocation = 'Output/' + args.camera + '/'
+    initialLocation = 'Output/'
+    if args.subfolder != '':
+        initialLocation += args.subfolder + '/'
+    initialLocation += args.camera + '/'
     locationToIterate = initialLocation + folderName + '/*.jpg'
     # Iterate through every photo in given folder, adding to the list
     # In the order that they are in in the folder
@@ -67,7 +77,10 @@ def createVideo(folderName, args):
 # Check if a folder already exists for the given camera parameter
 # If it does not, create one and its subdirectories
 def checkAndCreateFolders(folderName, args):
-    location = 'Output/' + args.camera + '/' + folderName
+    if args.subfolder != '':
+        location = 'Output/' + args.subfolder + "/" + args.camera + '/' + folderName
+    else:
+        location = 'Output/' + args.camera + '/' + folderName
     if not path.exists(location):
         try:
             os.makedirs(location)
@@ -86,7 +99,7 @@ def takeWebcamPhotoComplete(args):
     elif timeLocal > 19 or timeLocal < 4:
         folderName = 'Night'
 
-    # Execute procedure if we don't care about sunset or if sunset conditionas are met
+    # Execute procedure if we don't care about sunset or if sunset conditions are met
     if folderName != 'Sunset' or (folderName == 'Sunset' and isSunsetTime(args, 30)):
         checkAndCreateFolders(folderName, args)
         getPhoto(folderName, args)
@@ -106,17 +119,22 @@ def isSunsetTime(args, marginOfCloseness):
         return False
 
     # Get sunset times from this handy API: returns times in UTC
-    requestURL = 'https://api.sunrise-sunset.org/json?lat=' + lat + '&lng=' + lon 
+    # https://sunrise-sunset.org/api
+    requestURL = 'https://api.sunrise-sunset.org/json?lat=' + str(lat) + '&lng=' + str(lon) 
     response = requests.post(requestURL)
     if response.status_code != 200:
         return False
-    sunsetResponseDict = json.loads(response.json()['results'])                         # Convert json response to python dict
+    sunsetResponseDict = response.json()['results']                         # Convert json response to python dict
     sunsetTime = datetime.strptime(sunsetResponseDict["sunset"], "%I:%M:%S %p").time()  # Extract sunset time
-    timeNow = datetime.utcnow().time()                                                  # Get current UTC time
+    timeNow = datetime.utcnow()                                               # Get current UTC time
     
     # Check if current time is within margin of closeness to the given sunset time
-    if (timeNow - timedelta(minutes = marginOfCloseness) <= sunsetTime < timeNow + timedelta(minutes = marginOfCloseness)):
+    if ((timeNow- timedelta(minutes = marginOfCloseness)).time() <= sunsetTime < (timeNow + timedelta(minutes = marginOfCloseness)).time()):
+        
+        print('Executing sunset time')
         return True
+    
+    print('Not sunset time')
     return False
 
 # First argument is the name of the camera as. specified in the image's URL (e.g. aplocam)
