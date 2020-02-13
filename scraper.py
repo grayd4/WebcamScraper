@@ -85,7 +85,7 @@ def checkAndCreateFolders(folderName, args):
         try:
             os.makedirs(location)
         except OSError:
-            print ("Creation of the directory %s failed" % location)
+            scraperLog("Creation of the directory %s failed" % location, args)
 
 # Execute the standard webcam photo grabbing
 def takeWebcamPhotoComplete(args):
@@ -104,6 +104,8 @@ def takeWebcamPhotoComplete(args):
         checkAndCreateFolders(folderName, args)
         getPhoto(folderName, args)
         createVideo(folderName, args)
+        scraperLog("Executed %s scraper" % folderName, args)
+
 
 # Check sunset time at given coordinates
 # args: command flags
@@ -115,7 +117,7 @@ def isSunsetTime(args, marginOfCloseness):
         lat = float(args.latitude)
         lon = float(args.longitude)
     except ValueError:
-        print("Latitude or longitude flags are not valid floats.")
+        scraperLog("Latitude or longitude flags are not valid floats.", args)
         return False
 
     # Get sunset times from this handy API: returns times in UTC
@@ -131,11 +133,21 @@ def isSunsetTime(args, marginOfCloseness):
     # Check if current time is within margin of closeness to the given sunset time
     if ((timeNow- timedelta(minutes = marginOfCloseness)).time() <= sunsetTime < (timeNow + timedelta(minutes = marginOfCloseness)).time()):
         
-        print('Executing sunset time')
+        scraperLog("Sunset time. Current time: %s, target time: %s, margin: %s minutes" 
+            %(str(sunsetTime), str(timeNow.time()), str(marginOfCloseness)), args)
         return True
     
-    print('Not sunset time')
+    scraperLog("Not sunset time. Current time: %s, target time: %s, margin: %s minutes" 
+        %(str(sunsetTime), str(timeNow.time()), str(marginOfCloseness)), args)
     return False
+
+# Write to the log file specified
+def scraperLog(message, args):
+    # Open file, create if does not exist. Will append any written content
+    file = open("WebcamScraperLog.txt", "a")
+    file.write(str(datetime.utcnow()) + ": " + str(args.camera) + ": "+ message + "\n")
+    file.close()
+
 
 # First argument is the name of the camera as. specified in the image's URL (e.g. aplocam)
 if __name__ == "__main__":

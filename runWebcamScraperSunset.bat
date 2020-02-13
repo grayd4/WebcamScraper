@@ -26,7 +26,7 @@ python scraper.py -c west -u https://www.nps.gov/webcams-mora/ -sub rainier -s t
 python scraper.py -c tatoosh -u https://www.nps.gov/webcams-mora/ -sub rainier -s true -lat 46.8 -lon -121.74
 
 python scraper.py -c yosfalls -u https://pixelcaster.com/yosemite/webcams/ -sub yosemite -s true -lat 37.7 -lon -119.6
-python scraper.py -c ahwahnee -u https://pixelcaster.com/yosemite/webcams/ -sub yosemite -s true -lat 37.7 -lon -119.6
+python scraper.py -c ahwahnee2 -u https://pixelcaster.com/yosemite/webcams/ -sub yosemite -s true -lat 37.7 -lon -119.6
 python scraper.py -c sentinel -u https://pixelcaster.com/yosemite/webcams/ -sub yosemite -s true -lat 37.7 -lon -119.6
 python scraper.py -c turtleback -u https://pixelcaster.com/yosemite/webcams/ -sub yosemite -s true -lat 37.7 -lon -119.6
 python scraper.py -c yoselarge -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub yosemite -s true -lat 37.7 -lon -119.6

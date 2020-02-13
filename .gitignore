@@ -132,3 +132,5 @@ dmypy.json
 # The photos so that we don't upload them all to git
 *.jpg
 *.avi
+
+WebcamScraperLog.txt
