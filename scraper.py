@@ -133,12 +133,12 @@ def isSunsetTime(args, marginOfCloseness):
     # Check if current time is within margin of closeness to the given sunset time
     if ((timeNow- timedelta(minutes = marginOfCloseness)).time() <= sunsetTime < (timeNow + timedelta(minutes = marginOfCloseness)).time()):
         
-        scraperLog("Sunset time. Current time: %s, target time: %s, margin: %s minutes" 
-            %(str(sunsetTime), str(timeNow.time()), str(marginOfCloseness)), args)
+        scraperLog("Yes sunset time. Current time: %s, target time: %s, margin: %s minutes" 
+            %(str(timeNow.time()), str(sunsetTime), str(marginOfCloseness)), args)
         return True
     
     scraperLog("Not sunset time. Current time: %s, target time: %s, margin: %s minutes" 
-        %(str(sunsetTime), str(timeNow.time()), str(marginOfCloseness)), args)
+        %(str(timeNow.time()), str(sunsetTime), str(marginOfCloseness)), args)
     return False
 
 # Write to the log file specified
