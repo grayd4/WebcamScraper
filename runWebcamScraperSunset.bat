@@ -35,3 +35,12 @@ python scraper.py -c grsm -u https://www.nps.gov/featurecontent/ard/webcams/imag
 python scraper.py -c NEON.D07.GRSM.DP1.00033 -u https://phenocam.sr.unh.edu/data/latest/ -sub great_smoke_mountain -s true -lat 35.7 -lon -83.5
 python scraper.py -c gsng -u https://www.air-resource.net/GRSMNFGap/ -sub great_smoke_mountain -s true -lat 35.6 -lon -83.4
 python scraper.py -c grpk -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub great_smoke_mountain -s true -lat 35.6 -lon -83
+
+python scraper.py -c camerasinnott -u https://www.nps.gov/webcams-crla/ -sub crater_lake -s true -lat 43 -lon -122.2
+
+python scraper.py -c alpine -u https://www.nps.gov/webcams-dena/ -sub denali -s true -lat 63.8 -lon -149
+
+python scraper.py -c kawuneeche_valley -u https://www.nps.gov/webcams-romo/ -sub _rocky_mnp -s true -lat 40.3 -lon -105.8
+python scraper.py -c glacier_basin -u https://www.nps.gov/webcams-romo/ -sub _rocky_mnp -s true -lat 40.3 -lon -105.6
+python scraper.py -c longs_peak -u https://www.nps.gov/webcams-romo/ -sub _rocky_mnp -s true -lat 40.2 -lon -105.5
+python scraper.py -c alpine_visitor_center -u https://www.nps.gov/webcams-romo/ -sub _rocky_mnp -s true -lat 40.4 -lon -105.8
