@@ -40,7 +40,7 @@ python scraper.py -c camerasinnott -u https://www.nps.gov/webcams-crla/ -sub cra
 
 python scraper.py -c alpine -u https://www.nps.gov/webcams-dena/ -sub denali -s true -lat 63.8 -lon -149
 
-python scraper.py -c kawuneeche_valley -u https://www.nps.gov/webcams-romo/ -sub _rocky_mnp -s true -lat 40.3 -lon -105.8
-python scraper.py -c glacier_basin -u https://www.nps.gov/webcams-romo/ -sub _rocky_mnp -s true -lat 40.3 -lon -105.6
-python scraper.py -c longs_peak -u https://www.nps.gov/webcams-romo/ -sub _rocky_mnp -s true -lat 40.2 -lon -105.5
-python scraper.py -c alpine_visitor_center -u https://www.nps.gov/webcams-romo/ -sub _rocky_mnp -s true -lat 40.4 -lon -105.8
+python scraper.py -c kawuneeche_valley -u https://www.nps.gov/webcams-romo/ -sub rocky_mnp -s true -lat 40.3 -lon -105.8
+python scraper.py -c glacier_basin -u https://www.nps.gov/webcams-romo/ -sub rocky_mnp -s true -lat 40.3 -lon -105.6
+python scraper.py -c longs_peak -u https://www.nps.gov/webcams-romo/ -sub rocky_mnp -s true -lat 40.2 -lon -105.5
+python scraper.py -c alpine_visitor_center -u https://www.nps.gov/webcams-romo/ -sub rocky_mnp -s true -lat 40.4 -lon -105.8

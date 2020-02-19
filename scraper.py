@@ -145,7 +145,7 @@ def isSunsetTime(args, marginOfCloseness):
 def scraperLog(message, args):
     # Open file, create if does not exist. Will append any written content
     file = open("WebcamScraperLog.txt", "a")
-    file.write(str(datetime.utcnow()) + ": " + str(args.camera) + ": "+ message + "\n")
+    file.write(str(datetime.now()) + ": " + str(args.camera) + ": "+ message + "\n")
     file.close()
 
 
