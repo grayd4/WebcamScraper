@@ -20,6 +20,12 @@ python scraper.py -c netcam -u http://webcam.forkswa.com/webcam2/ -sub olympic
 python scraper.py -c olym -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub olympic
 
 python scraper.py -c current_ylake -u https://volcanoes.usgs.gov/vsc/captures/yellowstone/ -sub yellowstone
+python scraper.py -c washburn_ne -u https://www.nps.gov/webcams-yell/ -sub yellowstone
+python scraper.py -c washburn_sw -u https://www.nps.gov/webcams-yell/ -sub yellowstone
+python scraper.py -c mammoth_parade -u https://www.nps.gov/webcams-yell/ -sub yellowstone
+python scraper.py -c mammoth_electric -u https://www.nps.gov/webcams-yell/ -sub yellowstone
+python scraper.py -c mammoth_arch -u https://www.nps.gov/webcams-yell/ -sub yellowstone
+
 
 python scraper.py -c mountain -u https://www.nps.gov/webcams-mora/ -sub rainier
 python scraper.py -c west -u https://www.nps.gov/webcams-mora/ -sub rainier
