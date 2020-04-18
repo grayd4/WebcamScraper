@@ -137,8 +137,6 @@ def isSunsetTime(args, marginOfCloseness):
             %(str(timeNow.time()), str(sunsetTime), str(marginOfCloseness)), args)
         return True
     
-    scraperLog("Not sunset time. Current time: %s, target time: %s, margin: %s minutes" 
-        %(str(timeNow.time()), str(sunsetTime), str(marginOfCloseness)), args)
     return False
 
 # Write to the log file specified
