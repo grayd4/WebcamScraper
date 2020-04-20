@@ -20,11 +20,11 @@ python scraper.py -c netcam -u http://webcam.forkswa.com/webcam2/ -sub olympic -
 python scraper.py -c olym -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub olympic -s true -lat 48 -lon -123.8
 
 python scraper.py -c current_ylake -u https://volcanoes.usgs.gov/vsc/captures/yellowstone/ -s true -lat 44.5 -lon -110.4 -sub yellowstone
-python scraper.py -c mammoth_arch -u https://volcanoes.usgs.gov/vsc/captures/yellowstone/ -s true -lat 45.0 -lon -110.7 -sub yellowstone
-python scraper.py -c mammoth_electric -u https://volcanoes.usgs.gov/vsc/captures/yellowstone/ -s true -lat 45.0 -lon -110.7 -sub yellowstone
-python scraper.py -c mammoth_parade -u https://volcanoes.usgs.gov/vsc/captures/yellowstone/ -s true -lat 45.0 -lon -110.7 -sub yellowstone
-python scraper.py -c washburn_ne -u https://volcanoes.usgs.gov/vsc/captures/yellowstone/ -s true -lat 44.8 -lon -110.4 -sub yellowstone
-python scraper.py -c washburn_sw -u https://volcanoes.usgs.gov/vsc/captures/yellowstone/ -s true -lat 44.8 -lon -110.4 -sub yellowstone
+python scraper.py -c mammoth_arch -u https://www.nps.gov/webcams-yell/ -s true -lat 45.0 -lon -110.7 -sub yellowstone
+python scraper.py -c mammoth_electric -u https://www.nps.gov/webcams-yell/ -s true -lat 45.0 -lon -110.7 -sub yellowstone
+python scraper.py -c mammoth_parade -u https://www.nps.gov/webcams-yell/ -s true -lat 45.0 -lon -110.7 -sub yellowstone
+python scraper.py -c washburn_ne -u https://www.nps.gov/webcams-yell/ -s true -lat 44.8 -lon -110.4 -sub yellowstone
+python scraper.py -c washburn_sw -u https://www.nps.gov/webcams-yell/ -s true -lat 44.8 -lon -110.4 -sub yellowstone
 
 python scraper.py -c mountain -u https://www.nps.gov/webcams-mora/ -sub rainier -s true -lat 46.8 -lon -121.74
 python scraper.py -c west -u https://www.nps.gov/webcams-mora/ -sub rainier -s true -lat 46.8 -lon -121.74
