@@ -50,3 +50,30 @@ python scraper.py -c kawuneeche_valley -u https://www.nps.gov/webcams-romo/ -sub
 python scraper.py -c glacier_basin -u https://www.nps.gov/webcams-romo/ -sub rocky_mnp
 python scraper.py -c longs_peak -u https://www.nps.gov/webcams-romo/ -sub rocky_mnp
 python scraper.py -c alpine_visitor_center -u https://www.nps.gov/webcams-romo/ -sub rocky_mnp
+
+python scraper.py -c pinnacles_800 -u https://www.nps.gov/webcams-shen/ -sub shenandoah
+
+python scraper.py -c bvc_1024x576 -u https://www.nps.gov/webcams-shen/ -sub shenandoah
+python scraper.py -c bvc2 -u https://www.nps.gov/webcams-shen/ -sub shenandoah
+
+python scraper.py -c camera -u https://www.nps.gov/webcams-zion/ -sub zion
+
+python scraper.py -c camera1 -u https://www.wrh.noaa.gov/images/fgz/webcam/ -sub flagstaff
+
+python scraper.py -c bibe -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub big_bend
+
+python scraper.py -c oak_canopy -u https://www.nps.gov/webcams-seki/ -sub sequoia_kings
+python scraper.py -c seki -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub sequoia_kings
+
+python scraper.py -c ml_webcam -u https://www.nps.gov/webcams-lavo/ -sub lassen
+python scraper.py -c kyvc_webcam1 -u https://www.nps.gov/webcams-lavo/ -sub lassen
+
+python scraper.py -c iskywebcam -u https://www.nps.gov/cany/learn/photosmultimedia/images/ -sub canyonlands
+
+python scraper.py -c sr2 -u https://www.nps.gov/webcams-blca/ -sub black_canyon_gunnison
+python scraper.py -c srvc -u https://www.nps.gov/webcams-blca/ -sub black_canyon_gunnison
+
+python scraper.py -c sprucetree000M -u https://www.nps.gov/webcams-meve/ -sub mesa_verde
+
+python scraper.py -c camera0 -u https://www.nps.gov/webcams-gumo/ -sub guadalupe
+python scraper.py -c gumo -u https://www.nps.gov/webcams-gumo/ -sub guadalupe
