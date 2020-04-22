@@ -52,7 +52,6 @@ python scraper.py -c longs_peak -u https://www.nps.gov/webcams-romo/ -sub rocky_
 python scraper.py -c alpine_visitor_center -u https://www.nps.gov/webcams-romo/ -sub rocky_mnp
 
 python scraper.py -c pinnacles_800 -u https://www.nps.gov/webcams-shen/ -sub shenandoah
-
 python scraper.py -c bvc_1024x576 -u https://www.nps.gov/webcams-shen/ -sub shenandoah
 python scraper.py -c bvc2 -u https://www.nps.gov/webcams-shen/ -sub shenandoah
 

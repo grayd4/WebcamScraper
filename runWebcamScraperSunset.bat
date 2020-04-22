@@ -49,3 +49,29 @@ python scraper.py -c kawuneeche_valley -u https://www.nps.gov/webcams-romo/ -sub
 python scraper.py -c glacier_basin -u https://www.nps.gov/webcams-romo/ -sub rocky_mnp -s true -lat 40.3 -lon -105.6
 python scraper.py -c longs_peak -u https://www.nps.gov/webcams-romo/ -sub rocky_mnp -s true -lat 40.2 -lon -105.5
 python scraper.py -c alpine_visitor_center -u https://www.nps.gov/webcams-romo/ -sub rocky_mnp -s true -lat 40.4 -lon -105.8
+
+python scraper.py -c pinnacles_800 -u https://www.nps.gov/webcams-shen/ -sub shenandoah -s true -lat 38.5 -lon -78.5
+python scraper.py -c bvc_1024x576 -u https://www.nps.gov/webcams-shen/ -sub shenandoah -s true -lat 38.5 -lon -78.4
+python scraper.py -c bvc2 -u https://www.nps.gov/webcams-shen/ -sub shenandoah -s true -lat 38.5 -lon -78.4
+
+python scraper.py -c camera -u https://www.nps.gov/webcams-zion/ -sub zion -s true -lat 37.2 -lon -113
+
+python scraper.py -c camera1 -u https://www.wrh.noaa.gov/images/fgz/webcam/ -sub flagstaff -s true -lat 35.2 -lon -111.8
+
+python scraper.py -c bibe -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub big_bend -s true -lat 29.3 -lon -103.2
+
+python scraper.py -c oak_canopy -u https://www.nps.gov/webcams-seki/ -sub sequoia_kings -s true -lat 36.6 -lon -118.7
+python scraper.py -c seki -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub sequoia_kings -s true -lat 36.5 -lon -118.8
+
+python scraper.py -c ml_webcam -u https://www.nps.gov/webcams-lavo/ -sub lassen -s true -lat 40.5 -lon -121.6
+python scraper.py -c kyvc_webcam1 -u https://www.nps.gov/webcams-lavo/ -sub lassen -s true -lat 40.4 -lon -121.5
+
+python scraper.py -c iskywebcam -u https://www.nps.gov/cany/learn/photosmultimedia/images/ -sub canyonlands -s true -lat 38.5 -lon -109.8
+
+python scraper.py -c sr2 -u https://www.nps.gov/webcams-blca/ -sub black_canyon_gunnison -s true -lat 38.6 -lon -107.7
+python scraper.py -c srvc -u https://www.nps.gov/webcams-blca/ -sub black_canyon_gunnison -s true -lat 38.6 -lon -107.7
+
+python scraper.py -c sprucetree000M -u https://www.nps.gov/webcams-meve/ -sub mesa_verde -s true -lat 37.2 -lon -108.5
+
+python scraper.py -c camera0 -u https://www.nps.gov/webcams-gumo/ -sub guadalupe -s true -lat 31.9 -lon -104.8
+python scraper.py -c gumo -u https://www.nps.gov/webcams-gumo/ -sub guadalupe -s true -lat 31.9 -lon -104.8
