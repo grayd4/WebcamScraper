@@ -101,7 +101,6 @@ def takeWebcamPhotoComplete(args, folderName):
     createVideo(folderName, args)
     scraperLog("Executed %s scraper" % folderName, args)
 
-
 # Check sunset time at given coordinates
 # args: command flags
 # eventType: a photoEvent enum
@@ -123,16 +122,16 @@ def isEventTime(args, eventType, marginOfCloseness):
     if response.status_code != 200:
         return False
     sunsetResponseDict = response.json()['results']                         # Convert json response to python dict
-    sunsetTime = datetime.strptime(sunsetResponseDict[str(eventType)], "%I:%M:%S %p").time()  # Extract sunset time
+    sunsetTime = datetime.strptime(sunsetResponseDict[str(eventType.value)], "%I:%M:%S %p").time()  # Extract sunset time
     timeNow = datetime.utcnow()                                               # Get current UTC time
     
     # Check if current time is within margin of closeness to the given sunset time
     if ((timeNow- timedelta(minutes = marginOfCloseness)).time() <= sunsetTime < (timeNow + timedelta(minutes = marginOfCloseness)).time()):
         
         scraperLog("Yes %s time. Current time: %s, target time: %s, margin: %s minutes" 
-            %(str(eventType), str(timeNow.time()), str(sunsetTime), str(marginOfCloseness)), args)
+            %(str(eventType.value), str(timeNow.time()), str(sunsetTime), str(marginOfCloseness)), args)
         return True
-    
+
     return False
 
 # Write to the log file specified
