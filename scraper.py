@@ -9,6 +9,12 @@ import json     # For sunset
 import requests # For sunset
 from os import path
 from datetime import datetime, timedelta
+from enum import Enum
+
+class PhotoEvent(Enum):
+    SUNSET = "sunset"
+    SUNRISE = "sunrise"
+    SOLAR_NOON = "solar_noon"
 
 # Set up arguments command can take
 parser = argparse.ArgumentParser(description='Get some webcam footage')
@@ -22,7 +28,8 @@ parser.add_argument('-sub', '-subfolder', default = '', help = 'Subfolder to sen
 
 # Sunset flags:
 # If sunset set to true, will only grab photo if the current time is near to the sunset time
-# of the given latitude and longitude
+# of the given latitude and longitude. Will also grab photos from other relevant times-right
+# now just sunrise
 parser.add_argument('-s', '-sunset', default = 'false', \
     help = 'If this is set to \'true\', then the photo will only be grabbed if it\'s sunset in the \
         given timezone. \'true\' triggers the sunset, anything else will not.', metavar = 'SUN', dest = 'sunset')
@@ -61,7 +68,7 @@ def createVideo(folderName, args):
     # In the order that they are in in the folder
     for fileName in glob.glob(locationToIterate):
         img = cv2.imread(fileName)
-        height, width, layers = img.shape
+        height, width = img.shape
         size = (width, height)
         imgList.append(img)
 
@@ -88,30 +95,19 @@ def checkAndCreateFolders(folderName, args):
             scraperLog("Creation of the directory %s failed" % location, args)
 
 # Execute the standard webcam photo grabbing
-def takeWebcamPhotoComplete(args):
-    # Returns the hour (0-24). Meant to be used in the Pacific timezone
-    timeLocal = time.localtime(time.time()).tm_hour
-    folderName = 'Day'
-    if (args.sunset == 'true'):
-        folderName = 'Sunset'
-
-    # If a night photo - from 8 pm to 4 am
-    elif timeLocal > 19 or timeLocal < 4:
-        folderName = 'Night'
-
-    # Execute procedure if we don't care about sunset or if sunset conditions are met
-    if folderName != 'Sunset' or (folderName == 'Sunset' and isSunsetTime(args, 30)):
-        checkAndCreateFolders(folderName, args)
-        getPhoto(folderName, args)
-        createVideo(folderName, args)
-        scraperLog("Executed %s scraper" % folderName, args)
+def takeWebcamPhotoComplete(args, folderName):
+    checkAndCreateFolders(folderName, args)
+    getPhoto(folderName, args)
+    createVideo(folderName, args)
+    scraperLog("Executed %s scraper" % folderName, args)
 
 
 # Check sunset time at given coordinates
 # args: command flags
+# eventType: a photoEvent enum
 # marginOfCloseness: acceptable window of how close to sunset we must be, in minutes
 # Return true if close to sunset time, false if not
-def isSunsetTime(args, marginOfCloseness):
+def isEventTime(args, eventType, marginOfCloseness):
     # Grab lat and lon from args if the are correctly formatted
     try:
         lat = float(args.latitude)
@@ -127,14 +123,14 @@ def isSunsetTime(args, marginOfCloseness):
     if response.status_code != 200:
         return False
     sunsetResponseDict = response.json()['results']                         # Convert json response to python dict
-    sunsetTime = datetime.strptime(sunsetResponseDict["sunset"], "%I:%M:%S %p").time()  # Extract sunset time
+    sunsetTime = datetime.strptime(sunsetResponseDict[str(eventType)], "%I:%M:%S %p").time()  # Extract sunset time
     timeNow = datetime.utcnow()                                               # Get current UTC time
     
     # Check if current time is within margin of closeness to the given sunset time
     if ((timeNow- timedelta(minutes = marginOfCloseness)).time() <= sunsetTime < (timeNow + timedelta(minutes = marginOfCloseness)).time()):
         
-        scraperLog("Yes sunset time. Current time: %s, target time: %s, margin: %s minutes" 
-            %(str(timeNow.time()), str(sunsetTime), str(marginOfCloseness)), args)
+        scraperLog("Yes %s time. Current time: %s, target time: %s, margin: %s minutes" 
+            %(str(eventType), str(timeNow.time()), str(sunsetTime), str(marginOfCloseness)), args)
         return True
     
     return False
@@ -151,7 +147,25 @@ def scraperLog(message, args):
 if __name__ == "__main__":
 
     args = parser.parse_args()
-    takeWebcamPhotoComplete(args) 
+    # Returns the hour (0-24). Meant to be used in the Pacific timezone
+    timeLocal = time.localtime(time.time()).tm_hour
+    folderName = 'Day'
+    if (args.sunset == 'true'):
+        folderName = 'Sunset'
+
+    # If a night photo - from 8 pm to 4 am
+    elif timeLocal > 19 or timeLocal < 4:
+        folderName = 'Night'
+
+    # Execute procedure if we don't care about sunset or if sunset/sunrise conditions are met
+    if folderName != 'Sunset':
+        takeWebcamPhotoComplete(args, folderName)
+    else:
+        if isEventTime(args, PhotoEvent.SUNSET, 30):
+            takeWebcamPhotoComplete(args, folderName)
+        if isEventTime(args, PhotoEvent.SUNRISE, 30):
+            folderName = 'Sunrise'
+            takeWebcamPhotoComplete(args, folderName)
     
     
 
