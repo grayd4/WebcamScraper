@@ -68,7 +68,7 @@ def createVideo(folderName, args):
     # In the order that they are in in the folder
     for fileName in glob.glob(locationToIterate):
         img = cv2.imread(fileName)
-        height, width = img.shape
+        height, width, unused_ = img.shape
         size = (width, height)
         imgList.append(img)
 
