@@ -48,7 +48,7 @@ def getPhoto(folderName, args):
     nameString = 'Output/' 
     if args.subfolder != '':
         nameString += args.subfolder + '/'
-    nameString += args.camera + '/' + folderName + '/' + args.camera + str(time.time()) + '.jpg'
+    nameString += args.camera.replace('/', '') + '/' + folderName + '/' + args.camera.replace('/', '') + str(time.time()) + '.jpg'
     # Save the webcam capture in the desired location
     urllib.request.urlretrieve(args.URL + args.camera + '.jpg', nameString)
 
@@ -62,7 +62,7 @@ def createVideo(folderName, args):
     initialLocation = 'Output/'
     if args.subfolder != '':
         initialLocation += args.subfolder + '/'
-    initialLocation += args.camera + '/'
+    initialLocation += args.camera.replace('/', '') + '/'
     locationToIterate = initialLocation + folderName + '/*.jpg'
     # Iterate through every photo in given folder, adding to the list
     # In the order that they are in in the folder
@@ -74,7 +74,7 @@ def createVideo(folderName, args):
 
     # Create the 'video' that has yet to have images added to it
     # file name, fourcc, fps/images per second, size
-    out = cv2.VideoWriter(initialLocation + args.camera + folderName + '.avi', cv2.VideoWriter_fourcc(*'DIVX'), 0.5, size)
+    out = cv2.VideoWriter(initialLocation + args.camera.replace('/', '') + folderName + '.avi', cv2.VideoWriter_fourcc(*'DIVX'), 2, size)
 
     # Add image to video
     for i in range(len(imgList)):
@@ -85,9 +85,9 @@ def createVideo(folderName, args):
 # If it does not, create one and its subdirectories
 def checkAndCreateFolders(folderName, args):
     if args.subfolder != '':
-        location = 'Output/' + args.subfolder + "/" + args.camera + '/' + folderName
+        location = 'Output/' + args.subfolder + "/" + args.camera.replace('/', '') + '/' + folderName
     else:
-        location = 'Output/' + args.camera + '/' + folderName
+        location = 'Output/' + args.camera.replace('/', '') + '/' + folderName
     if not path.exists(location):
         try:
             os.makedirs(location)
@@ -141,7 +141,6 @@ def scraperLog(message, args):
     file.write(str(datetime.now()) + ": " + str(args.camera) + ": "+ message + "\n")
     file.close()
 
-
 # First argument is the name of the camera as. specified in the image's URL (e.g. aplocam)
 if __name__ == "__main__":
 
@@ -165,8 +164,3 @@ if __name__ == "__main__":
         if isEventTime(args, PhotoEvent.SUNRISE, 30):
             folderName = 'Sunrise'
             takeWebcamPhotoComplete(args, folderName)
-    
-    
-
-
-    

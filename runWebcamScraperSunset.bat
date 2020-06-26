@@ -75,3 +75,32 @@ python scraper.py -c sprucetree000M -u https://www.nps.gov/webcams-meve/ -sub me
 
 python scraper.py -c camera0 -u https://www.nps.gov/webcams-gumo/ -sub guadalupe -s true -lat 31.9 -lon -104.8
 python scraper.py -c gumo -u https://www.nps.gov/webcams-gumo/ -sub guadalupe -s true -lat 31.9 -lon -104.8
+
+python scraper.py -c RMD_VC_01 -u https://www.nps.gov/webcams-sagu/ -sub saguaro -s true -lat 32.2 -lon -110.7
+
+python scraper.py -c eye -u https://www.nps.gov/webcams-acad/ -sub acadia -s true -lat 44.3 -lon -68.2
+
+python scraper.py -c thro -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub theo_roos -s true -lat 46.9 -lon -103.4
+
+python scraper.py -c thro -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub theo_roos -s true -lat 46.9 -lon -103.4
+
+python scraper.py -c brda -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub bryce_canyon -s true -lat 37.5 -lon -112.2
+
+python scraper.py -c BartlettLagoon -u https://www.nps.gov/webcams-glba/ -sub glacier_bay -s true -lat 58.4 -lon -135.9
+python scraper.py -c LowerBay -u https://www.nps.gov/webcams-glba/ -sub glacier_bay -s true -lat 58.4 -lon -135.9
+python scraper.py -c BartlettDock -u https://www.nps.gov/webcams-glba/ -sub glacier_bay -s true -lat 58.4 -lon -135.9
+
+python scraper.py -c grte -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub grand_teton -s true -lat 43.7 -lon -110.7
+python scraper.py -c webcam -u http://www.americanalpineclub.org.php56-21.dfw3-2.websitetestlink.com/images/gtcr_webcam/ -sub grand_teton -s true -lat 43.7 -lon -110.7
+
+python scraper.py -c HaleSummitCamCrater -u https://www.nps.gov/webcams-hale/ -sub haleakala -s true -lat 20.7 -lon -156.25
+
+python scraper.py -c KWcam/images/M -u https://volcanoes.usgs.gov/observatories/hvo/cams/ -sub hawaii_volcanoes -s true -lat 19.4 -lon -155.3
+python scraper.py -c F1cam/images/M -u https://volcanoes.usgs.gov/observatories/hvo/cams/ -sub hawaii_volcanoes -s true -lat 19.4 -lon -155.3
+
+python scraper.py -c thimage -u https://www.nps.gov/webcams-isro/ -sub isle_royale -s true -lat 48.2 -lon -88.5
+python scraper.py -c image -u https://www.nps.gov/webcams-isro/ -sub isle_royale -s true -lat 48.1 -lon -88.5
+
+python scraper.py -c bear_glacier -u https://pvs.nupointsystems.com/latest2.php?pass=%F3uq%2C%F7%85c%D7%2A0%9D%95%5D%05%00 -sub kenai_fjords -s true -lat 60 -lon -149.6
+
+

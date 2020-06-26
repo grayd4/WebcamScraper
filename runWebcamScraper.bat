@@ -26,7 +26,6 @@ python scraper.py -c mammoth_parade -u https://www.nps.gov/webcams-yell/ -sub ye
 python scraper.py -c mammoth_electric -u https://www.nps.gov/webcams-yell/ -sub yellowstone
 python scraper.py -c mammoth_arch -u https://www.nps.gov/webcams-yell/ -sub yellowstone
 
-
 python scraper.py -c mountain -u https://www.nps.gov/webcams-mora/ -sub rainier
 python scraper.py -c west -u https://www.nps.gov/webcams-mora/ -sub rainier
 python scraper.py -c tatoosh -u https://www.nps.gov/webcams-mora/ -sub rainier
@@ -76,3 +75,26 @@ python scraper.py -c sprucetree000M -u https://www.nps.gov/webcams-meve/ -sub me
 
 python scraper.py -c camera0 -u https://www.nps.gov/webcams-gumo/ -sub guadalupe
 python scraper.py -c gumo -u https://www.nps.gov/webcams-gumo/ -sub guadalupe
+
+python scraper.py -c RMD_VC_01 -u https://www.nps.gov/webcams-sagu/ -sub saguaro
+
+python scraper.py -c eye -u https://www.nps.gov/webcams-acad/ -sub acadia
+
+python scraper.py -c thro -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub theo_roos
+
+python scraper.py -c BartlettLagoon -u https://www.nps.gov/webcams-glba/ -sub glacier_bay
+python scraper.py -c LowerBay -u https://www.nps.gov/webcams-glba/ -sub glacier_bay
+python scraper.py -c BartlettDock -u https://www.nps.gov/webcams-glba/ -sub glacier_bay
+
+python scraper.py -c grte -u https://www.nps.gov/featurecontent/ard/webcams/images/ -sub grand_teton
+python scraper.py -c webcam -u http://www.americanalpineclub.org.php56-21.dfw3-2.websitetestlink.com/images/gtcr_webcam/ -sub grand_teton
+
+python scraper.py -c HaleSummitCamCrater -u https://www.nps.gov/webcams-hale/ -sub haleakala
+
+python scraper.py -c KWcam/images/M -u https://volcanoes.usgs.gov/observatories/hvo/cams/ -sub hawaii_volcanoes
+python scraper.py -c F1cam/images/M -u https://volcanoes.usgs.gov/observatories/hvo/cams/ -sub hawaii_volcanoes
+
+python scraper.py -c thimage -u https://www.nps.gov/webcams-isro/ -sub isle_royale
+python scraper.py -c image -u https://www.nps.gov/webcams-isro/ -sub isle_royale
+
+python scraper.py -c bear_glacier -u https://pvs.nupointsystems.com/latest2.php?pass=%F3uq%2C%F7%85c%D7%2A0%9D%95%5D%05%00 -sub kenai_fjords
